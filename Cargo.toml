@@ -8,8 +8,6 @@ edition = "2018"
 
 [dependencies]
 itertools = "0.8.2"
-nom = "6.0.1"
-bytecount = "0.6.2"
 
 [dev-dependencies]
 criterion = "0.3"

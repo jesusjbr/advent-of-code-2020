@@ -1,6 +1,4 @@
-use nom::bytes::complete::{tag, take};
-use nom::character::complete::{char, digit1, not_line_ending};
-use nom::sequence::tuple;
+use itertools::Itertools;
 
 #[derive(Debug, Clone)]
 struct Policy {
@@ -17,27 +15,19 @@ struct Database<'a> {
 
 impl<'a> Database<'a> {
     fn from_str(input: &'a str) -> Self {
-        // The target pattern looks like this:
-        // 1-3 a: abcde
-        let raw_parsed = tuple::<_, _, nom::error::Error<&str>, _>((
-            digit1,
-            char('-'),
-            digit1,
-            char(' '),
-            take(1usize),
-            tag(": "),
-            not_line_ending,
-        ))(input)
-        .unwrap()
-        .1;
-        Database {
-            policy: Policy {
-                min: raw_parsed.0.parse().unwrap(),
-                max: raw_parsed.2.parse().unwrap(),
-                letter: raw_parsed.4.chars().next().unwrap(),
-            },
-            password: raw_parsed.6,
-        }
+        input
+            .split([':', '-', ' '].as_ref())
+            .filter(|s| !s.is_empty())
+            .collect_tuple()
+            .map(|(min, max, letter, password)| Database {
+                policy: Policy {
+                    min: min.parse().unwrap(),
+                    max: max.parse().unwrap(),
+                    letter: letter.chars().next().unwrap(),
+                },
+                password: password,
+            })
+            .unwrap()
     }
 
     fn is_valid(&self) -> bool {
