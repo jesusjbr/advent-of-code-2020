@@ -74,3 +74,7 @@ fn black_magic(input: &str) -> u32 {
         .sum()
 }
 ```
+
+# Day 7
+## Part 2
+An possible improvement would be adding memoization.
