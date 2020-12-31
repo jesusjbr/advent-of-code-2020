@@ -10,7 +10,7 @@ fn count_unique_answers(input: &str) -> usize {
 fn count_answers_common_everyone(input: &str) -> usize {
     input
         .split("\n\n")
-        .map(|(group)| {
+        .map(|group| {
             group
                 .lines()
                 .next()
