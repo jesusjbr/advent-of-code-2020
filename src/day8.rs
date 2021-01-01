@@ -70,7 +70,7 @@ fn search_valid_change(instructions: Vec<(&str, i32, bool)>) -> i32 {
             }
             acc_before_repeat(instr)
         })
-        .find(|(acc, terminated)| *terminated)
+        .find(|(_acc, terminated)| *terminated)
         .unwrap()
         .0
 }

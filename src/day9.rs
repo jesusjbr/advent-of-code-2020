@@ -29,7 +29,7 @@ fn encryption_weakness(encrypted_data: Vec<u64>, preamble_size: usize) -> u64 {
         .iter()
         .position(|n| *n == invalid_number)
         .unwrap();
-    for start in (0..position) {
+    for start in 0..position {
         let searched_chunk = (2..position)
             .filter_map(|i| {
                 encrypted_data[start..position]
@@ -71,7 +71,7 @@ pub mod tests {
     }
 
     #[test]
-    fn part2() {
+    pub fn part2() {
         let input = include_str!("../inputs/day9.txt");
         let encrypted_data = parse_input(input);
         assert_eq!(encryption_weakness(encrypted_data, 25), 13935797);
