@@ -59,9 +59,9 @@ fn is_valid_part2_v2(&self) -> bool {
 # Day 6
 
 ## Part 2
-85% speed improvement
+85% speed improvement. Mask / bitset method
 ```Rust 
-fn black_magic(input: &str) -> u32 {
+fn mask(input: &str) -> u32 {
     input
         .split("\n\n")
         .map(|group| {

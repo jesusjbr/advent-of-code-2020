@@ -216,9 +216,6 @@ impl Grid {
             self.cells = next_grid
                 .iter()
                 .map(|(position, cell)| {
-                    if *position == (Position { x: 0, y: 0 }) {
-                        let a = 5;
-                    }
                     let total = self.visible_occupied_seats(position);
                     (position.clone(), cell.transition_visibles(total))
                 })
