@@ -112,7 +112,7 @@ impl FromStr for DecoderMask {
 
 impl DecoderMask {
     fn apply<'a>(&'a self, n: u64) -> impl Iterator<Item = u64> + 'a {
-        let num = (n | self.or);
+        let num = n | self.or;
         self.xor.iter().map(move |floating| num ^ floating)
     }
 }

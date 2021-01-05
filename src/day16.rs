@@ -82,7 +82,7 @@ fn who_is_who(input: &str) -> usize {
                 .map(|n| n.parse::<usize>().unwrap())
                 .enumerate()
         })
-        .filter(|(i, n)| {
+        .filter(|(_i, n)| {
             rules
                 .iter()
                 .any(|rule| rule[0].contains(n) || rule[1].contains(n))
@@ -94,7 +94,7 @@ fn who_is_who(input: &str) -> usize {
         .iter()
         .map(|rule| {
             let mut v = HashSet::new();
-            for column in (0..rules_size) {
+            for column in 0..rules_size {
                 if fields
                     .clone()
                     .filter(|(i, _field)| *i == column as usize)
